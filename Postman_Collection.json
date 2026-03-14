@@ -1,0 +1,248 @@
+{
+  "info": {
+    "name": "Lost & Found Portal API",
+    "description": "Complete API collection for Lost & Found Portal Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Welcome",
+      "item": [
+        {
+          "name": "Welcome",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Welcome endpoint with API info"
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check if API is running"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Public - Get Items",
+      "item": [
+        {
+          "name": "Get All Lost Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/lost",
+              "host": ["{{base_url}}"],
+              "path": ["api", "items", "lost"]
+            },
+            "description": "Retrieve all lost items"
+          }
+        },
+        {
+          "name": "Get All Found Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/found",
+              "host": ["{{base_url}}"],
+              "path": ["api", "items", "found"]
+            },
+            "description": "Retrieve all found items"
+          }
+        },
+        {
+          "name": "Get Item by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "items", "1"]
+            },
+            "description": "Get specific item by ID"
+          }
+        },
+        {
+          "name": "Search Items",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/items/search?keyword=phone",
+              "host": ["{{base_url}}"],
+              "path": ["api", "items", "search"],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "phone"
+                }
+              ]
+            },
+            "description": "Search items by keyword"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Create Items",
+      "item": [
+        {
+          "name": "Create Lost Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"type\": \"LOST\",\"itemName\": \"Samsung Galaxy Phone\",\"description\": \"Black Samsung Galaxy S21 with silver case\",\"location\": \"Engineering Building\",\"photoUrl\": \"https://example.com/phone.jpg\",\"studentName\": \"Alex Johnson\",\"studentNumber\": \"STU12345\",\"status\": \"LOST\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/items",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "items"]
+            },
+            "description": "Create a new lost item"
+          }
+        },
+        {
+          "name": "Create Found Item",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"type\": \"FOUND\",\"itemName\": \"Brown Leather Wallet\",\"description\": \"Contains multiple credit cards and ID\",\"location\": \"Lost & Found Desk\",\"photoUrl\": \"https://example.com/wallet.jpg\",\"foundBy\": \"Security Guard - John Smith\",\"status\": \"NOT_CLAIMED\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/items",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "items"]
+            },
+            "description": "Create a new found item"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Update Items",
+      "item": [
+        {
+          "name": "Update Item Status",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\": \"CLAIMED\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/items/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "items", "1"]
+            },
+            "description": "Update an item's status or other fields"
+          }
+        },
+        {
+          "name": "Update Item Description",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"description\": \"Updated description\",\"location\": \"New Location\"}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/items/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "items", "1"]
+            },
+            "description": "Update item description and/or location"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin - Match & Delete",
+      "item": [
+        {
+          "name": "Match Lost and Found Items",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"lostItemId\": 1,\"foundItemId\": 2}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/match-items",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "match-items"]
+            },
+            "description": "Link a lost item with its corresponding found item"
+          }
+        },
+        {
+          "name": "Delete Item",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/admin/items/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "admin", "items", "1"]
+            },
+            "description": "Delete an item from the system"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
+
